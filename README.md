@@ -4,6 +4,6 @@ Proyecto 01
 
 Asignatura:  Analisis y Diseño de Algortimos  |
 Alumno: Carlos Alberto Rolon Gonzalez         |
-Profedor: Dr. Rolando Quintero Téllez         |
+Profesor: Dr. Rolando Quintero Téllez         |
 
 Noviembre 2020
