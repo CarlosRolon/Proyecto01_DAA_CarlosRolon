@@ -65,6 +65,7 @@ public class GenerarGrafo {
             Set<Integer> ini = new HashSet<>();
             grafo.put(i,ini);
             Set<Integer> vertices;
+            // Busca el nodo con espacio disponible
             do{
                 nodo = (int)(Math.random()*(i-1) );
                 vertices = grafo.get(nodo);
@@ -74,7 +75,7 @@ public class GenerarGrafo {
             
             Set<Integer> verticesB = grafo.get(i);
             verticesB.add(nodo);
-            vertices.add(i);
+            vertices.add(i); 
         }        
         return grafo;
     }
