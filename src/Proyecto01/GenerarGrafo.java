@@ -48,7 +48,7 @@ public class GenerarGrafo {
     private static HashMap<Integer,Set<Integer>> Metodo_Barabasi_Albert(int n , int d )
     {
         HashMap<Integer,Set<Integer>> grafo = new HashMap<>();
-        int grado;
+        int grado , nodo;
         double probablidad  ;        
         // Genera Nodos Iniciales
         for (int i = 0; i < d; i++) {
@@ -64,18 +64,17 @@ public class GenerarGrafo {
         for (int i = d; i < n; i++) {
             Set<Integer> ini = new HashSet<>();
             grafo.put(i,ini);
-            
-            for (int j = 0 ; j < i; j++) {              
-                Set<Integer> vertices = grafo.get(j);
+            Set<Integer> vertices;
+            do{
+                nodo = (int)(Math.random()*(i-1) );
+                vertices = grafo.get(nodo);
                 grado  = vertices.size();
                 probablidad = 1 - (grado/ d);
-                
-                if( probablidad > 0 ){
-                    Set<Integer> verticesB = grafo.get(i);
-                    verticesB.add(j);
-                    vertices.add(i);
-                }
-            }
+            }while(probablidad <= 0);    
+            
+            Set<Integer> verticesB = grafo.get(i);
+            verticesB.add(nodo);
+            vertices.add(i);
         }        
         return grafo;
     }
