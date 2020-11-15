@@ -44,13 +44,14 @@ public class GenerarGrafo {
     } 
         
    // Metodos de creacion de grafos
-    
-    private static HashMap<Integer,Set<Integer>> Metodo_Barabasi_Albert(int n , int d )
-    {
+  
+     private static  HashMap<Integer,Set<Integer>>  Metodo_Barabasi_Albert(int n , int d ){
         HashMap<Integer,Set<Integer>> grafo = new HashMap<>();
-        int grado , nodo;
-        double probablidad  ;        
-        // Genera Nodos Iniciales
+        double probNodo,probRandom ;
+        double nV = 0 , grado;
+        Set<Integer> vertices;
+
+         // Genera Nodos Iniciales
         for (int i = 0; i < d; i++) {
             Set<Integer> ini = new HashSet<>();
             for (int j = 0; j < d; j++) {
@@ -59,28 +60,37 @@ public class GenerarGrafo {
                 } 
             }
             grafo.put(i,ini);
-        }        
+        }              
         // Genera Conexiones 
-        for (int i = d; i < n; i++) {
+        for (int i = d; i < n ; i++) {
+            // Agrega el nodo nuevo
             Set<Integer> ini = new HashSet<>();
-            grafo.put(i,ini);
-            Set<Integer> vertices;
-            // Busca el nodo con espacio disponible
-            do{
-                nodo = (int)(Math.random()*(i-1) );
-                vertices = grafo.get(nodo);
-                grado  = vertices.size();
-                probablidad = 1 - (grado/ d);
-            }while(probablidad <= 0);    
-            
-            Set<Integer> verticesB = grafo.get(i);
-            verticesB.add(nodo);
-            vertices.add(i); 
-        }        
+            grafo.put(i,ini);          
+            nV = 0;            
+            // Busca conectarse
+            for (int j = 0 ; j < i && nV < d ; j++) {
+                
+                vertices = grafo.get(j);
+                grado  = vertices.size();                
+                // Probabilidad del nodo
+                probNodo = 1 - (grado/ d);                 
+                // Probabilidad alteatoria
+                probRandom = Math.random();    
+                // Verifica que este dentro de la probablidad
+                if (probNodo >= probRandom )
+                {
+                    Set<Integer> num1 = grafo.get(i);
+                    Set<Integer> num2 = grafo.get(j);
+                    num1.add(j);
+                    num2.add(i);
+                    nV++;
+                }
+            }
+        }
         return grafo;
-    }
-    
-    
+    }  
+   
+     
     private static  HashMap<Integer,Set<Integer>>  Metodo_GeograficoSimple(int n , double r )
     {
         HashMap<Integer,Set<Integer>> grafo = new HashMap<>();
